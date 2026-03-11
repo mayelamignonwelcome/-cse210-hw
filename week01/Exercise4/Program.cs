@@ -4,7 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<int> numbers = new List<int>();
+        Console.WriteLine("Hello World! This is the Exercise4 Project.");
+         List<int> numbers = new List<int>();
 
         int NumberOfNumbers = -1;
         while (NumberOfNumbers != 0)
