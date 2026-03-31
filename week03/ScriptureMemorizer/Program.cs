@@ -6,7 +6,15 @@ class Program
 {
     static void Main()
     {
-        List<Scripture> scriptures = LoadScripturesFromFile("scriptures.txt");
+        const string scriptureFile = "scriptures.txt";
+
+        if (!File.Exists(scriptureFile))
+        {
+            Console.WriteLine($"Fichier introuvable : {scriptureFile}. Assurez-vous qu'il est présent dans le dossier de l'exécutable.");
+            return;
+        }
+
+        List<Scripture> scriptures = LoadScripturesFromFile(scriptureFile);
         Random random = new Random();
         Scripture scripture = scriptures[random.Next(scriptures.Count)];
 
