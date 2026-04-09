@@ -349,6 +349,9 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder
 .mfractor/
 
+# Ignore ScriptureMemorizer .lscache file
+week03/ScriptureMemorizer/ScriptureMemorizer.csproj.lscache
+
 # Local History for Visual Studio
 .localhistory/
 
