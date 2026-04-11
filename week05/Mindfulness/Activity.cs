@@ -18,7 +18,13 @@ public class Activity
         Console.WriteLine($"Welcome to the {_name} Activity!");
         Console.WriteLine(_description);
         Console.Write("Enter duration in seconds: ");
-        _duration = int.Parse(Console.ReadLine());
+
+        string input = Console.ReadLine();
+        while (!int.TryParse(input, out _duration) || _duration <= 0)
+        {
+            Console.Write("Please enter a valid positive number for duration: ");
+            input = Console.ReadLine();
+        }
 
         Console.WriteLine("Prepare to begin...");
         ShowSpinner(3);
