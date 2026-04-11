@@ -4,6 +4,10 @@ using System.IO;
 
 class Program
 {
+    // Extra feature: Leveling system for gamification
+    // Players gain levels as they accumulate points (1 level per 1000 points).
+    // When leveling up, they get a bonus reward. This adds motivation and progression to the quest system.
+    
     static int totalScore = 0;
     static List<Goal> goals = new List<Goal>();
 
@@ -15,7 +19,7 @@ class Program
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. Record Event");
             Console.WriteLine("3. Show Goals");
-            Console.WriteLine("4. Show Score");
+            Console.WriteLine("4. Show Score & Level");
             Console.WriteLine("5. Save Goals");
             Console.WriteLine("6. Load Goals");
             Console.WriteLine("7. Quit");
@@ -26,13 +30,30 @@ class Program
                 case "1": CreateGoal(); break;
                 case "2": RecordEvent(); break;
                 case "3": ShowGoals(); break;
-                case "4": Console.WriteLine($"Score: {totalScore}"); break;
+                case "4": ShowScoreAndLevel(); break;
                 case "5": SaveGoals(); break;
                 case "6": LoadGoals(); break;
                 case "7": return;
                 default: Console.WriteLine("Invalid choice."); break;
             }
         }
+    }
+
+    static int GetLevel()
+    {
+        return totalScore / 1000 + 1;
+    }
+
+    static void ShowScoreAndLevel()
+    {
+        int currentLevel = GetLevel();
+        int nextLevelScore = currentLevel * 1000;
+        int scoreToNextLevel = nextLevelScore - totalScore;
+        
+        Console.WriteLine($"\n=== Quest Progress ===");
+        Console.WriteLine($"Level: {currentLevel}");
+        Console.WriteLine($"Score: {totalScore}");
+        Console.WriteLine($"Points to next level: {scoreToNextLevel}");
     }
 
     static void CreateGoal()
@@ -60,9 +81,18 @@ class Program
         ShowGoals();
         Console.Write("Which goal did you complete? ");
         int index = int.Parse(Console.ReadLine()) - 1;
+        
+        int previousLevel = GetLevel();
         int earned = goals[index].RecordEvent();
         totalScore += earned;
+        int newLevel = GetLevel();
+        
         Console.WriteLine($"You earned {earned} points!");
+        
+        if (newLevel > previousLevel)
+        {
+            Console.WriteLine($"🎉 LEVEL UP! You are now level {newLevel}! 🎉");
+        }
     }
 
     static void ShowGoals()
