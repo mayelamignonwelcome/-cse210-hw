@@ -98,9 +98,4 @@ class Program
     }
 }
 
-/*
-Exceeding Requirements:
-- Added save/load functionality to persist goals and score.
-- Checklist goals include bonus points when fully completed.
-- Program structure allows easy extension (levels, negative goals, etc.).
-*/
+
